@@ -1,22 +1,6 @@
-from graph import *
+from lab3.graph import *
 
-canvasSize(600, 800)
-windowSize(600, 800)
-
-def paint_rectangle(x1, y1, x2, y2, penS, penC, brushC):
-    penSize(penS)
-    penColor(penC)
-    brushColor(brushC)
-    return rectangle(x1, y1, x2, y2)
-
-def paint_circle(x, y, r, penS, penC, brushC):
-    penSize(penS)
-    penColor(penC)
-    brushColor(brushC)
-    return circle(x, y, r)
-
-def elips(x,y,r1,r2):
-
+from lab3.graph import rectangle, brushColor, penColor, canvasSize, windowSize
 
 house_color = (85, 85, 0)
 ground_color = (128, 102, 0)
@@ -28,15 +12,51 @@ eyes_color = (136, 170, 135)
 clew_color = (153, 153, 153)
 
 
-house = paint_rectangle(0, 0, 600, 400, 1, house_color, house_color)
-groud = paint_rectangle(0, 400, 600, 800, 1, ground_color, ground_color)
-window_big = paint_rectangle(350, 50, 550, 350, 1, window_color_1, window_color_1)
-window_small = paint_rectangle(360, 60, 540, 340, 1, window_color_2, window_color_2)
-window_big_part_1 = paint_rectangle(440, 60, 460, 340, 1, window_color_1, window_color_1)
-window_big_part_2 = paint_rectangle(360, 215, 540, 245, 1, window_color_1, window_color_1)
-cat_tail = paint_circle(550, 600, 100, 1, "black", cat_color)
+def paint_window(x, y, window_width, window_height):
+    penColor(window_color_1)
+    brushColor(window_color_1)
+    rectangle(x, y, (x + window_width), (y + window_height))
+    penColor(window_color_2)
+    brushColor(window_color_2)
+    rectangle((x + window_width / 10), (y + window_height / 10), (x + window_width - window_width / 10), \
+              (y + window_height - window_height / 10))
+    penColor(window_color_1)
+    brushColor(window_color_1)
+    rectangle(x, (y + window_height / 3), (x + window_width), (y + window_height / 3 + window_height / 10))
+    rectangle((x + window_width/2 - window_width/20), y, (x + window_width/2 + window_width/20), (y + window_height))
 
-print(coords(cat_tail))
-changeCoords(cat_tail, ((449, 449), (651, 529)))
+
+
+def paint_cat(x, y, size, direction):
+    pass
+
+
+def paint_clew(x, y, size, direction):
+    pass
+
+
+def paint_ground(canvas_width, canvas_height):
+    penColor(ground_color)
+    brushColor(ground_color)
+    rectangle(0, canvas_height / 2, canvas_width, canvas_height)
+
+
+def paint_house(canvas_width, canvas_height):
+    penColor(house_color)
+    brushColor(house_color)
+    rectangle(0, 0, canvas_width, canvas_height / 2)
+
+
+def paint_pictire(canvas_width, canvas_height):
+    canvasSize(canvas_width, canvas_height)
+    windowSize(canvas_width, canvas_height)
+    paint_ground(canvas_width, canvas_height)
+    paint_house(canvas_width, canvas_height)
+    paint_window(320, 20, canvas_width / 3 , canvas_height / 2 * 0.75)
+
+    # paint_cat(x, y, size, direction)
+    # paint_clew(x, y, size, direction)
+
+paint_pictire (600, 800)
 
 run()
